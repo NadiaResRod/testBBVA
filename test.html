@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document </title>
+    <script>
+        async function ApiConsume(){
+            var xhr = new XMLHttpRequest();
+            xhr.onload = exito;
+            xhr.onerror = error;
+            xhr.open('GET','https://db.ygoprodeck.com/api/v7/cardinfo.php');
+            xhr.send();
+             }     
+            function exito(){
+                var datos = JSON.parse(this.responseText);
+                console.log(datos);
+                let table = document.getElementById("target");
+
+                datos.data.forEach((el,index) =>{
+                    table.innerHTML += "<tr><td>" + el.id + "</tr></td>";
+                }
+                ) 
+
+                }
+
+            function error(){
+                console.log('Solicitud fallida',er);
+            }
+    </script>
+</head>
+
+<body>
+     <button onclick="ApiConsume()">Click me</button>
+    <table id="target">
+
+        <th>
+        <td>id</td> 
+        <td>nombre</td>
+        <td>tipo</td>
+        </th>
+    <tbody> 
+        <tr>
+        <td>id</td>
+        <td>nombre</td>
+        <td>tipo
+            
+        </td>
+        </tr>
+
+    </tbody>
+
+     </table>
+</body>
+</html>
